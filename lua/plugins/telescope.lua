@@ -21,9 +21,10 @@ return {
 
             -- VIM specific
             vim.keymap.set("n", "<leader>fc", function()
-                builtin.find_files({
-                    cwd = vim.fn.stdpath("config"),
-                })
+                local config_dir = vim.fn.stdpath("config")
+                local real_lua = vim.uv.fs_realpath(config_dir .. "/lua")
+                local cwd = real_lua and vim.fn.fnamemodify(real_lua, ":h") or config_dir
+                builtin.find_files({ cwd = cwd })
             end, { desc = "Find configuration files" })
             vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "Find help" })
             vim.keymap.set("n", "<leader>fC", builtin.commands, { desc = "Find config" })
