@@ -16,26 +16,27 @@ return {
                 vim.lsp.buf.definition()
             end, { desc = 'Go to definition in new tab' })
             vim.lsp.enable("biome")
+            vim.lsp.enable("roslyn_ls")
         end,
     },
-    {
-        "mason-org/mason-lspconfig.nvim",
-        opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer", "tailwindcss", "ts_ls", "yamlls", "biome" },
-        },
-        dependencies = {
-            {
-                "mason-org/mason.nvim",
-                opts = {
-                    registries = {
-                        "github:mason-org/mason-registry",
-                        "github:Crashdummyy/mason-registry",
-                    },
-                },
-            },
-            "neovim/nvim-lspconfig",
-        },
-    },
+    -- {
+    --     "mason-org/mason-lspconfig.nvim",
+    --     opts = {
+    --         ensure_installed = { "lua_ls", "rust_analyzer", "tailwindcss", "ts_ls", "yamlls", "biome" },
+    --     },
+    --     dependencies = {
+    --         {
+    --             "mason-org/mason.nvim",
+    --             opts = {
+    --                 registries = {
+    --                     "github:mason-org/mason-registry",
+    --                     "github:Crashdummyy/mason-registry",
+    --                 },
+    --             },
+    --         },
+    --         "neovim/nvim-lspconfig",
+    --     },
+    -- },
     {
         "folke/trouble.nvim",
         opts = {},
