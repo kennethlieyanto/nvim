@@ -17,6 +17,7 @@ return {
             end, { desc = 'Go to definition in new tab' })
             vim.lsp.enable("biome")
             vim.lsp.enable("roslyn_ls")
+            vim.lsp.enable("lua_ls")
         end,
     },
     -- {

@@ -48,3 +48,27 @@ vim.lsp.config('*', {
         },
     },
 })
+
+local opencode_cmd = 'opencode --port'
+---@type snacks.terminal.Opts
+local snacks_terminal_opts = {
+    win = {
+        position = 'right',
+        enter = false,
+    },
+}
+
+---@type opencode.Opts
+vim.g.opencode_opts = {
+    server = {
+        start = function()
+            require('snacks.terminal').open(opencode_cmd, snacks_terminal_opts)
+        end,
+    },
+}
+
+-- Can also leverage toggle functionality.
+-- If you use <leader> here, remove 't' — otherwise Neovim will add input delay to your <leader> when typing in the terminal to watch for the mapping.
+vim.keymap.set({ 'n' }, '<leader>wc', function()
+    require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
+end, { desc = 'Toggle OpenCode' })
