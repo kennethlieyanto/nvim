@@ -1,17 +1,5 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000,
-        opts = {
-            transparent_background = true,
-        },
-        config = function()
-            vim.cmd.colorscheme("catppuccin")
-        end,
-        enabled = false
-    },
-    {
         "Shatur/neovim-ayu",
         priority = 1000,
         opts = {
@@ -25,10 +13,15 @@ return {
                 CursorLine = { bg = "None" },
                 CursorColumn = { bg = "None" },
                 VertSplit = { bg = "None" },
+                LineNr = { fg = "#7A8593" },
+                LineNrAbove = { fg = "#7A8593" },
+                LineNrBelow = { fg = "#7A8593" },
+                CursorLineNr = { fg = "#E6B450", bg = "None" },
             }
         },
-        config = function()
+        config = function(_, opts)
+            require("ayu").setup(opts)
             vim.cmd.colorscheme("ayu")
         end,
-    }
+    },
 }
