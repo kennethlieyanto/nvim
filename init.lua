@@ -25,6 +25,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.wrap = false
 vim.opt.splitright = true
 vim.opt.winborder = "rounded"
+vim.opt.exrc = true
 
 local severity = vim.diagnostic.severity
 
