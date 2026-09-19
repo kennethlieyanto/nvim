@@ -15,3 +15,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Open help in a full-window tab",
+	group = vim.api.nvim_create_augroup("help-fullscreen", { clear = true }),
+	pattern = "help",
+	callback = function()
+		vim.cmd("wincmd T")
+	end,
+})
