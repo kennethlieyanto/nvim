@@ -8,14 +8,31 @@ return {
         ts.install(ensure_installed)
     end,
     config = function()
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = { '*' },
-            callback = function()
-                -- Enable treesitter highlighting
-                pcall(vim.treesitter.start)
+        local function try_attach(buf, lang)
+            -- Load the parser; bail if the language has none / is not installed.
+            if not vim.treesitter.language.add(lang) then
+                return
+            end
+            if not vim.api.nvim_buf_is_valid(buf) then
+                return
+            end
 
-                -- Enable treesitter based indentation
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            vim.treesitter.start(buf, lang)
+
+            -- Only use treesitter indentation if the language has an indents query;
+            -- otherwise leave Neovim's filetype indentexpr in place.
+            if vim.treesitter.query.get(lang, "indents") then
+                vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+        end
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "*" },
+            callback = function(args)
+                local lang = vim.treesitter.language.get_lang(args.match)
+                if lang then
+                    try_attach(args.buf, lang)
+                end
             end,
         })
     end,
