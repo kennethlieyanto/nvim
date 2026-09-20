@@ -20,6 +20,10 @@ return {
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("nixd")
 
+            if vim.fn.executable("copilot-language-server") == 1 then
+                vim.lsp.enable("copilot")
+            end
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "Buffer-local LSP keymaps",
                 group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -96,7 +100,16 @@ return {
         dependencies = { "rafamadriz/friendly-snippets" },
         version = "1.*",
         opts = {
-            keymap = { preset = "enter" },
+            keymap = {
+                preset = "enter",
+                ["<Tab>"] = {
+                    "snippet_forward",
+                    function()
+                        return require("sidekick").nes_jump_or_apply()
+                    end,
+                    "fallback",
+                },
+            },
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
