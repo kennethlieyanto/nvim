@@ -12,7 +12,10 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to plus regist
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "yank plus register" })
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete to plus register" })
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "delete to plus register" })
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Open tmux sessionizer" })
+
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -57,3 +60,7 @@ vim.keymap.set("n", "k", "gk", { desc = "Move up by visual line" })
 vim.keymap.set("n", "<leader>wx", function()
     vim.cmd("Lazy")
 end)
+
+-- Execute the current line/selection as Lua
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute line as Lua" })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Execute selection as Lua" })

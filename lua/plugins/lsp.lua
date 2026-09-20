@@ -5,19 +5,39 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-            vim.keymap.set("n", "gv", function()
-                vim.cmd("vsplit")
-                vim.lsp.buf.definition()
-            end, { desc = "Go to definition in vsplit" })
-            -- Go to definition in a new tab
-            vim.keymap.set('n', '<leader>gt', function()
-                vim.cmd('tab split')
-                vim.lsp.buf.definition()
-            end, { desc = 'Go to definition in new tab' })
+            vim.lsp.config("*", {
+                capabilities = {
+                    workspace = {
+                        didChangeWatchedFiles = {
+                            dynamicRegistration = true,
+                        },
+                    },
+                },
+            })
+
             vim.lsp.enable("biome")
             vim.lsp.enable("roslyn_ls")
             vim.lsp.enable("lua_ls")
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                desc = "Buffer-local LSP keymaps",
+                group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+                callback = function(event)
+                    local map = function(keys, fn, desc)
+                        vim.keymap.set("n", keys, fn, { buffer = event.buf, desc = "LSP: " .. desc })
+                    end
+
+                    map("gd", vim.lsp.buf.definition, "Go to definition")
+                    map("gv", function()
+                        vim.cmd("vsplit")
+                        vim.lsp.buf.definition()
+                    end, "Go to definition in vsplit")
+                    map("<leader>gt", function()
+                        vim.cmd("tab split")
+                        vim.lsp.buf.definition()
+                    end, "Go to definition in new tab")
+                end,
+            })
         end,
     },
     -- {

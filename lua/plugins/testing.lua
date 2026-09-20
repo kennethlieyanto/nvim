@@ -22,14 +22,14 @@ return {
                 function()
                     require("neotest").run.run(vim.fn.expand("%"))
                 end,
-                desc = "Neotest summary"
+                desc = "Run current test file",
             },
             {
                 "<leader>tR",
                 function()
-                    require("neotest").run.run(vim.loop.cwd())
+                    require("neotest").run.run(vim.uv.cwd())
                 end,
-                desc = "Neotest summary"
+                desc = "Run all tests",
             },
         },
     },

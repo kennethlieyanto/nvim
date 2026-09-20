@@ -10,7 +10,8 @@ return {
             local builtin = require("telescope.builtin")
 
             -- Core
-            vim.keymap.set("n", "<C-p>", "<CMD>lua require'config.telescope-config'.project_files()<CR>")
+            vim.keymap.set("n", "<C-p>", "<CMD>lua require'config.telescope-config'.project_files()<CR>",
+                { desc = "Find project files" })
             vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Telescope live grep" })
             vim.keymap.set("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, { desc = "Find symbols" })
             vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find recent files" })

@@ -1,5 +1,5 @@
 if not vim.g.vscode then
-	return
+    return
 end
 
 vim.keymap.set("n", "<leader>`", "<Cmd>lua require('vscode').call('vscode-harpoon.addEditor')<CR>")
@@ -14,9 +14,9 @@ vim.keymap.set("n", "<leader>ws", "<Cmd>lua require('vscode').call('outline.focu
 vim.keymap.set("n", "<leader>wt", "<Cmd>lua require('vscode').call('workbench.view.testing.focus')<CR>")
 vim.keymap.set("n", "<leader>wd", "<Cmd>lua require('vscode').call('workbench.view.debug')<CR>")
 vim.keymap.set(
-	"n",
-	"<leader>wx",
-	"<Cmd>lua require('vscode').call('workbench.extensions.action.focusExtensionsView')<CR>"
+    "n",
+    "<leader>wx",
+    "<Cmd>lua require('vscode').call('workbench.extensions.action.focusExtensionsView')<CR>"
 )
 vim.keymap.set("n", "<leader>wq", "<Cmd>lua require('vscode').call('workbench.panel.markers.view.focus')<CR>")
 vim.keymap.set("n", "<leader>ta", "<Cmd>lua require('vscode').call('testing.runAll')<CR>")

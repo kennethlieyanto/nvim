@@ -5,7 +5,6 @@ return {
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     },
-    lazy = false,
     config = function()
         require("neo-tree").setup({
             source_selector = {
@@ -74,8 +73,8 @@ return {
                 require("neo-tree.command").execute({ toggle = true })
             end,
             remap = true,
+            desc = "Toggle file explorer",
         },
-        { "<leader>ws", "<cmd>Neotree document_symbols<cr>" },
+        { "<leader>ws", "<cmd>Neotree document_symbols<cr>", desc = "Document symbols" },
     },
-    enabled = true,
 }

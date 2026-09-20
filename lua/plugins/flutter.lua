@@ -1,9 +1,9 @@
 return {
-	"nvim-flutter/flutter-tools.nvim",
-	lazy = false,
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-	},
-	config = true,
-	enabled = false,
+    "nvim-flutter/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    config = true,
+    enabled = false,
 }
