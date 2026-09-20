@@ -18,6 +18,7 @@ return {
             vim.lsp.enable("biome")
             vim.lsp.enable("roslyn_ls")
             vim.lsp.enable("lua_ls")
+            vim.lsp.enable("nixd")
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "Buffer-local LSP keymaps",

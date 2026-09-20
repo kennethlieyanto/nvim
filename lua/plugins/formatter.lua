@@ -25,7 +25,7 @@ return {
                 json = { "biome" },
                 yaml = { "prettier" },
                 cs = { "csharpier" },
-                nix = { "alejandra" },
+                nix = { "nixfmt" },
             },
             format_on_save = {
                 timeout_ms = 3000,
