@@ -7,7 +7,7 @@ vim.opt.softtabstop = 4
 -- Line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "auto:2"
 
 -- Search
 vim.opt.ignorecase = true
