@@ -16,7 +16,7 @@ return {
             })
 
             vim.lsp.enable("biome")
-            vim.lsp.enable("roslyn_ls")
+            -- vim.lsp.enable("roslyn_ls") -- trying out easy-dotnet.nvim
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("nixd")
 
