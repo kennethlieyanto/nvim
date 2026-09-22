@@ -19,6 +19,7 @@ return {
             -- vim.lsp.enable("roslyn_ls") -- trying out easy-dotnet.nvim
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("nixd")
+            vim.lsp.enable("ts_ls")
 
             if vim.fn.executable("copilot-language-server") == 1 then
                 vim.lsp.enable("copilot")
