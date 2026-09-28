@@ -12,7 +12,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to plus regist
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "yank plus register" })
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete to plus register" })
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Open tmux sessionizer" })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
