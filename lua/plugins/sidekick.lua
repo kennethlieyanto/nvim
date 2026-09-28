@@ -1,11 +1,15 @@
 return {
-    "folke/sidekick.nvim",
+    -- Pointed at the herdr PR branch until herdr is supported upstream.
+    -- See https://github.com/folke/sidekick.nvim/pull/333
+    "rmarganti/sidekick.nvim",
+    branch = "herdr",
     event = "VeryLazy",
     opts = {
         cli = {
             mux = {
                 enabled = true,
-                backend = "tmux",
+                backend = "herdr",
+                create = "window",
             },
         },
     },
