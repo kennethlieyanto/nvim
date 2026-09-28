@@ -11,6 +11,25 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "paste without dirtying curr
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to plus register" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "yank plus register" })
 
+vim.keymap.set("n", "<C-f>", function()
+    local out = vim.fn.system({ "herdr", "tab", "create", "--focus", "--cwd", vim.fn.getcwd() })
+    if vim.v.shell_error ~= 0 then
+        vim.notify("Failed to create herdr tab", vim.log.levels.ERROR)
+        return
+    end
+    local ok, decoded = pcall(vim.json.decode, out)
+    local result = ok and decoded.result
+    local pane = result and result.root_pane and result.root_pane.pane_id
+    local tab = result and result.tab and result.tab.tab_id
+    if not pane or not tab then
+        vim.notify("Failed to parse herdr tab response", vim.log.levels.ERROR)
+        return
+    end
+    local close = "herdr tab close " .. tab
+    local cmd = "sh -c 'trap \"" .. close .. "\" INT TERM; herdr-sessionizer; " .. close .. "'"
+    vim.fn.system({ "herdr", "pane", "run", pane, cmd })
+end, { desc = "Open herdr sessionizer in new tab" })
+
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete to plus register" })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
