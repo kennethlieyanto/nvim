@@ -19,15 +19,39 @@ return {
                 follow_current_file = {
                     enabled = true,
                 },
+                window = {
+                    mappings = {
+                        ["."] = "toggle_hidden",
+                        ["/"] = "filter_on_submit",
+                        ["z"] = "fuzzy_finder",
+                        ["<C-c>"] = "clear_filter",
+                    },
+                },
             },
-            sources = { "filesystem", "git_status" },
+            document_symbols = {
+                window = {
+                    position = "right",
+                    mappings = {
+                        ["l"] = function(state)
+                            local node = state.tree:get_node()
+                            if node:has_children() and not node:is_expanded() then
+                                require("neo-tree.sources.common.commands").toggle_node(state)
+                            else
+                                require("neo-tree.sources.document_symbols.commands").open(state)
+                            end
+                        end,
+                        ["h"] = "close_node",
+                        ["/"] = "filter_on_submit",
+                    },
+                },
+            },
+            sources = { "filesystem", "git_status", "document_symbols" },
             window = {
                 mappings = {
                     ["l"] = "open",
                     ["h"] = "close_node",
                     ["H"] = "close_all_nodes",
                     ["v"] = "open_vsplit",
-                    ["."] = "toggle_hidden",
                     ["O"] = function(state)
                         ---@diagnostic disable-next-line: undefined-field
                         local node = state.tree:get_node()
@@ -45,9 +69,6 @@ return {
                             vim.cmd("caddfile " .. vim.fn.fnameescape(node:get_id()))
                         end
                     end,
-                    ["/"] = "filter_on_submit",
-                    ["z"] = "fuzzy_finder",
-                    ["<C-c>"] = "clear_filter",
                 },
             },
         })
@@ -75,6 +96,12 @@ return {
             remap = true,
             desc = "Toggle file explorer",
         },
-        { "<leader>ws", "<cmd>Neotree document_symbols<cr>", desc = "Document symbols" },
+        {
+            "<leader>ws",
+            function()
+                require("neo-tree.command").execute({ source = "document_symbols", toggle = true })
+            end,
+            desc = "Toggle document symbols",
+        },
     },
 }
